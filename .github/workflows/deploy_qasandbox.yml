@@ -35,7 +35,7 @@ jobs:
     - name: Authenticate Sandbox
       run: |
         echo "${SALESFORCE_JWT_SECRET_KEY}" > server.key
-        sfdx force:auth:jwt:grant --jwtkeyfile ./server.key --setalias EPAM --instanceurl https://test.salesforce.com --clientid $(cat ./main/EPAM_CONSUMER_KEY) --username $(cat ./main/EPAM_USERNAME)
+        sfdx force:auth:jwt:grant --jwtkeyfile ./server.key --setalias qaorg --instanceurl https://test.salesforce.com --clientid $(cat ./main/QA_CONSUMER_KEY) --username $(cat ./main/QA_USERNAME)
       env:
         SALESFORCE_JWT_SECRET_KEY: ${{ secrets.SALESFORCE_JWT_SECRET_KEY }}
     - name: Deploy code to Target Sandbox
