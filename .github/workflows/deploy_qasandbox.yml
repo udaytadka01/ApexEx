@@ -39,8 +39,8 @@ jobs:
         path: main
     - name: Set environment variable
       run: |
-        cat ./env/.github/workflows/env | grep EPAM_CONSUMER_KEY= | grep -o '".*"' | sed 's/"//g' > ./main/EPAM_CONSUMER_KEY
-        cat ./env/.github/workflows/env | grep EPAM_USERNAME= | grep -o '".*"' | sed 's/"//g' > ./main/EPAM_USERNAME
+        cat ./env/.github/workflows/env | grep EPAM_CONSUMER_KEY= | grep -o '".*"' | sed 's/"//g' > ./main/QA_CONSUMER_KEY
+        cat ./env/.github/workflows/env | grep EPAM_USERNAME= | grep -o '".*"' | sed 's/"//g' > ./main/QA_USERNAME
     - name: Authenticate Sandbox
       run: |
         echo "${SALESFORCE_JWT_SECRET_KEY}" > server.key
