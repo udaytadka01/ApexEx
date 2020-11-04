@@ -22,22 +22,31 @@ jobs:
     needs: validate
     
     steps:
-    - name: deploy to prod
-      run: echo deployment complete
-      
     - name: Install Salesforce CLI
       run: |
        wget https://developer.salesforce.com/media/salesforce-cli/sfdx-cli/channels/stable/sfdx-cli-v7.72.0-697e9faee2-linux-x64.tar.xz
        mkdir sfdx-cli
        tar xJf sfdx-cli-v7.72.0-697e9faee2-linux-x64.tar.xz -C sfdx-cli --strip-components 1
        ./sfdx-cli/install
-     
+    - name: Checkout dev branch and grab environment keys
+      uses: actions/checkout@v2
+      with:
+        ref: 'dev'
+        path: env
+    - name: Checkout source code
+      uses: actions/checkout@v2
+      with:
+        path: main
+    - name: Set environment variable
+      run: |
+        cat ./env/.github/workflows/env | grep EPAM_CONSUMER_KEY= | grep -o '".*"' | sed 's/"//g' > ./main/EPAM_CONSUMER_KEY
+        cat ./env/.github/workflows/env | grep EPAM_USERNAME= | grep -o '".*"' | sed 's/"//g' > ./main/EPAM_USERNAME
     - name: Authenticate Sandbox
       run: |
         echo "${SALESFORCE_JWT_SECRET_KEY}" > server.key
         sfdx force:auth:jwt:grant --jwtkeyfile ./server.key --setalias qaorg --instanceurl https://test.salesforce.com --clientid $(cat ./main/QA_CONSUMER_KEY) --username $(cat ./main/QA_USERNAME)
       env:
-        SALESFORCE_JWT_SECRET_KEY: ${{ secrets.SALESFORCE_JWT_SECRET_KEY }}
+        SALESFORCE_JWT_SECRET_KEY: ${{ secrets.SFDX_JWT_SECRET }}
     - name: Deploy code to Target Sandbox
       run: |
           cd ./main
