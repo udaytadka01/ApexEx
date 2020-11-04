@@ -32,3 +32,14 @@ jobs:
        tar xJf sfdx-cli-v7.72.0-697e9faee2-linux-x64.tar.xz -C sfdx-cli --strip-components 1
        ./sfdx-cli/install
      
+    - name: Authenticate Sandbox
+      run: |
+        echo "${SALESFORCE_JWT_SECRET_KEY}" > server.key
+        sfdx force:auth:jwt:grant --jwtkeyfile ./server.key --setalias EPAM --instanceurl https://test.salesforce.com --clientid $(cat ./main/EPAM_CONSUMER_KEY) --username $(cat ./main/EPAM_USERNAME)
+      env:
+        SALESFORCE_JWT_SECRET_KEY: ${{ secrets.SALESFORCE_JWT_SECRET_KEY }}
+    - name: Deploy code to Target Sandbox
+      run: |
+          cd ./main
+          sfdx force:source:deploy --wait 180 -u EPAM --manifest manifest/package.xml --verbose
+
