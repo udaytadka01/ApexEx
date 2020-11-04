@@ -50,5 +50,5 @@ jobs:
     - name: Deploy code to Target Sandbox
       run: |
           cd ./main
-          sfdx force:source:deploy --wait 180 -u EPAM --manifest manifest/package.xml --verbose
+          sfdx force:source:deploy --wait 180 -u qaorg --manifest manifest/package.xml --verbose
 
