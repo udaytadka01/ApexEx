@@ -35,7 +35,7 @@ jobs:
         cat server.key
         cat ./main/QA_CONSUMER_KEY
         cat ./main/QA_USERNAME
-        sfdx force:auth:jwt:grant --jwtkeyfile ./server.key --setalias qaorg --instanceurl https://test.salesforce.com --clientid $(cat ./main/QA_CONSUMER_KEY) --username $(cat ./main/QA_USERNAME)
+        sfdx force:auth:jwt:grant --jwtkeyfile ./server.key --setalias qaorg --instanceurl https://login.salesforce.com --clientid $(cat ./main/QA_CONSUMER_KEY) --username $(cat ./main/QA_USERNAME)
      #  sfdx force:auth:jwt:grant --jwtkeyfile ./server.key --setalias qaorg --instanceurl https://test.salesforce.com --clientid 3MVG9bhkrN.tsmW_4B6qdyXrf7zLvgLz3GejpQpqG.X46L0fl4muv36x_IntYAixLXXR2F_1uyw== --username shprot34@resourceful-bear-jseaq.com --setdefaultusername
        
      #    sfdx force:auth:jwt:grant --clientid 3MVG9JEx.BE6yifP0uECQu_R_i2GGcTWMixpfXv8ZrU2_DRB84aXlDr9BPZ3OIVzH9YkwJSkUX8kH8bwW6Jh6 \
