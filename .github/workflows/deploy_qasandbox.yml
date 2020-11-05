@@ -48,4 +48,3 @@ jobs:
       run: |
           cd ./main
           sfdx force:source:deploy --wait 180 -u qaorg --manifest manifest/package.xml --verbose
-
