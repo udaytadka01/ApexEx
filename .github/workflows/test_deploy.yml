@@ -34,11 +34,6 @@ jobs:
         cat ./env/.github/workflows/env | grep INT_CONSUMER_KEY= | grep -o '".*"' | sed 's/"//g' > ./main/INT_CONSUMER_KEY
         cat ./env/.github/workflows/env | grep INT_USERNAME= | grep -o '".*"' | sed 's/"//g' > ./main/INT_USERNAME
     
-    - name: Convert metadata to mdapi format
-      run: |
-        cd main
-        sfdx force:source:convert --rootdir force-app --outputdir metadatadeploy
-    
     - name: Authenticate Sandbox
       run: |
         echo "${SALESFORCE_JWT_SECRET_KEY}" > server.key
