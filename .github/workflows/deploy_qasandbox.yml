@@ -1,10 +1,10 @@
 name: Deploy
 
-on:
+#on:
 #  pull_request:
-   push:
-    branches:
-      - main
+#   push:
+ #   branches:
+ #     - main
 
 jobs:
   deploy:      
