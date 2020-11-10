@@ -23,7 +23,7 @@ jobs:
     - name: Checkout integration branch and grab environment keys
       uses: actions/checkout@v2
       with:
-        ref: 'integration'
+        ref: 'main'
         path: env
     - name: Checkout source code
       uses: actions/checkout@v2
