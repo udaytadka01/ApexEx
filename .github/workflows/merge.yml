@@ -2,7 +2,7 @@ name: Merge
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["approval", "unit-test"]
+    workflows: ["approval-ex", "unit-test"]
     branches: [main]
     types: 
       - completed
