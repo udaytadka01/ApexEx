@@ -6,7 +6,7 @@ name: approval-ex
 # events but only for the main branch
 on:
 
-  push:
+  pull_request:
     branches: [ main ]
 #  pull_request:
 #    branches: [ main ]
@@ -23,6 +23,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        if: github.actor == 'udaytadka'
+#        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
